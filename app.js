@@ -1,20 +1,26 @@
-const searchSongs = () => {
+const searchSongs = async () => {
     const searchText = document.getElementById('input-field').value;
-    console.log(searchText);
+    // console.log(searchText);
     document.getElementById('input-field').value = "";
     const url = `https://api.lyrics.ovh/suggest/${searchText}`;
-    console.log(url);
+    // console.log(url);
     fetch(url)
         .then(res => res.json())
         .then(data => {
             showDetails(data.data);
         })
+        .catch(error => {
+            displayError('Something went wrong!!! Please try again later.');
+        })
+    // const res = await fetch(url);
+    // const data = await res.json();
+    // showDetails(data.data);
 }
 
 const showDetails = songs => {
+    const songContainer = document.getElementById('song-container');
+    songContainer.innerHTML = '';
     songs.forEach(song => {
-        console.log(song);
-        const songContainer = document.getElementById('song-container');
         const songDiv = document.createElement('div');
         songDiv.className = 'single-result row align-items-center my-3 p-3';
         songDiv.innerHTML = `
@@ -34,18 +40,26 @@ const showDetails = songs => {
     });
 }
 
+// const getLyric = async (artist, title) => {
+//     const url = `https://api.lyrics.ovh/v1/${artist}/${title}`;
+//     const res = await fetch(url);
+//     const data = await res.json();
+//     displayLyrics(data.lyrics);    
+// }
 const getLyric = (artist, title) => {
-    console.log(artist, title);
     const url = `https://api.lyrics.ovh/v1/${artist}/${title}`;
-    console.log(url);
     fetch(url)
-    .then(res => res.json())
-    .then(data => {
-        displayLyrics(data.lyrics);
-    })
+        .then(res => res.json())
+        .then(data => {
+            displayLyrics(data.lyrics);
+        })
 }
-
 const displayLyrics = lyrics => {
     const songLyrics = document.getElementById('song-lyrics');
     songLyrics.innerText = lyrics;
+}
+
+const displayError = error => {
+    const errorText = document.getElementById('error-message');
+    errorText.innerText = error;
 }
