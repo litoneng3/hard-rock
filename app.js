@@ -26,10 +26,9 @@ const showDetails = songs => {
         songDiv.innerHTML = `
             <div class="col-md-9">
                 <h3 class="lyrics-name">${song.title}</h3>
-                <p class="author lead">Album by <span>${song.artist.name}</span></p>
-                
-                <audio controls>
-                    <source src="${song.preview}">                   
+                <p class="author lead">Album by <span>${song.artist.name}</span></p>               
+                <audio controls loop>
+                    <source src="${song.preview}" type="audio/mp3">                   
                 </audio>
             </div>
             <div class="col-md-3 text-md-right text-center">
