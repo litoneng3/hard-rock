@@ -29,7 +29,7 @@ const showDetails = songs => {
                 <p class="author lead">Album by <span>${song.artist.name}</span></p>
                 <img src="${song.artist.picture}">
                 <audio controls>
-                    <source src="${song.preview}" type="audio/ogg">                   
+                    <source src="${song.preview}">                   
                 </audio>
             </div>
             <div class="col-md-3 text-md-right text-center">
@@ -54,9 +54,9 @@ const getLyric = (artist, title) => {
             displayLyrics(data.lyrics);
         })
 }
-const displayLyrics = lyrics => {
+const displayLyrics = lyric => {
     const songLyrics = document.getElementById('song-lyrics');
-    songLyrics.innerText = lyrics;
+    songLyrics.innerText = lyric;
 }
 
 const displayError = error => {
